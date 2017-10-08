@@ -20,13 +20,29 @@ sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+
 }
 
 
 dependencies {
+	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-remote-shell')
+	compile('org.springframework.boot:spring-boot-starter-web')
+
+
+
+	//Thymeleaf plantilla
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	compile 'com.h2database:h2:1.4.192'
+
+	// https://mvnrepository.com/artifact/com.h2database/h2
+	compile group: 'com.h2database', name: 'h2', version: '1.4.192'
+
+	//Trabajando con los webjars. ver http://www.webjars.org/
+	compile 'org.webjars:bootstrap:3.3.7-1'
+	compile 'org.webjars:jquery:3.1.0'
+	compile 'org.webjars:materializecss:0.97.7'
+
+	//Prueba.
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-	compile("org.webjars:jquery:2.0.3-1")
 }

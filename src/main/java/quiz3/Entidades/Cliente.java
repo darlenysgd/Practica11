@@ -1,4 +1,4 @@
-package Entidades;
+package quiz3.Entidades;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
