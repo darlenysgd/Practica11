@@ -53,29 +53,30 @@
     <div class="panel panel-default">
         <div class="panel-heading">Registro de Clientes</div>
         <div class="panel-body">
-            <form class="form-horizontal">
+
+            <form class="form-horizontal" action="#" th:action="@{/clientes}" th:object="${cliente}" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="cedula">Cédula:</label>
                     <div class="col-sm-10">
-                        <input class="form-control" id="cedula" type="text"/>
+                        <input class="form-control" id="cedula" type="text" th:field="*{cedula}"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="nombre">Nombre:</label>
                     <div class="col-sm-10">
-                        <input class="form-control" id="nombre" type="text"/>
+                        <input class="form-control" id="nombre" type="text" th:field="*{nombre}"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="apellido">Apellido:</label>
                     <div class="col-sm-10">
-                        <input class="form-control" id="apellido" type="text"/>
+                        <input class="form-control" id="apellido" type="text" th:field="*{apellido}"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="telefono">Telefono:</label>
                     <div class="col-sm-10">
-                        <input class="form-control" id="telefono" type="text"/>
+                        <input class="form-control" id="telefono" type="text" th:field="*{telefono}"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -83,18 +84,16 @@
                     <div class="col-sm-10">
                         <span class="input-group-btn">
                             <span class="btn btn-default btn-file">
-                                Buscar… <input class="form-control" type="file" id="imgInp"/>
+                                Buscar… <input class="form-control" name="file" type="file" id="imgInp"/>
                             </span>
                         </span>
                         <img id='img-upload'/>
                     </div>
                 </div>
+                <button class="btn-success" type="submit">Guardar</button>
             </form>
         </div>
-        <div class="panel-footer">
-            <button class="btn-danger" >Cancelar</button>
-            <button class="btn-success" type="submit">Guardar</button>
-        </div>
+
     </div>
 </body>
 

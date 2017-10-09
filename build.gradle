@@ -35,8 +35,7 @@ dependencies {
 	//Thymeleaf plantilla
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 
-	// https://mvnrepository.com/artifact/com.h2database/h2
-	compile group: 'com.h2database', name: 'h2', version: '1.4.192'
+	compile("com.h2database:h2")
 
 	//Trabajando con los webjars. ver http://www.webjars.org/
 	compile 'org.webjars:bootstrap:3.3.7-1'
