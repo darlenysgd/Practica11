@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>Clientes</title>
+
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
+
+    <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Cédula</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Télefono</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="cl: ${clientes}">
+                <td th:text="${cl.cedula}" ></td>
+                <td th:text="${cl.nombre}" ></td>
+                <td th:text="${c1.apellido}"></td>
+                <td th:text="${c1.telefono}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

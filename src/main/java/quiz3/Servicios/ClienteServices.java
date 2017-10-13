@@ -6,6 +6,7 @@ import quiz3.Entidades.Cliente;
 import quiz3.repositorio.ClienteRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Created by darle on 10/8/2017.
@@ -20,5 +21,10 @@ public class ClienteServices {
     public Cliente crearCliente(Cliente cliente){
         clienteRepository.save(cliente);
         return cliente;
+    }
+
+    public List<Cliente> findAllClientes(){
+
+        return clienteRepository.findAll();
     }
 }
