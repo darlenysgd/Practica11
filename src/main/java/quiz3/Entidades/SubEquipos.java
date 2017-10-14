@@ -8,7 +8,7 @@ import javax.persistence.Id;
  * Created by darle on 10/12/2017.
  */
 @Entity
-public class SubEquipos {
+public class SubEquipos extends Equipo{
     @Id
     @GeneratedValue
     private long id;

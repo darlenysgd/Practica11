@@ -25,7 +25,7 @@ public class EquipoServices {
 
     public List<Equipo> findAllEquipos(){
 
-        return equipoRepository.findAll();
+        return findAllEquipos();
     }
 
 }
