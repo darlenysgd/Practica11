@@ -2,7 +2,7 @@ package quiz3.Servicios;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import quiz3.Entidades.Equipo;
+import quiz3.Entidades.Equipos;
 import quiz3.repositorio.EquipoRepository;
 
 import javax.transaction.Transactional;
@@ -18,12 +18,12 @@ public class EquipoServices {
     EquipoRepository equipoRepository;
 
     @Transactional
-    public Equipo crearEquipo(Equipo equipo){
+    public Equipos crearEquipo(Equipos equipo){
         equipoRepository.save(equipo);
         return equipo;
     }
 
-    public List<Equipo> findAllEquipos(){
+    public List<Equipos> findAllEquipos(){
 
         return findAllEquipos();
     }

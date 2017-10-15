@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head  lang="en">
+    <meta charset="UTF-8"/>
+    <title>Sub-Categorías de Equipos</title>
+
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
+
+    <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div th:include="fragments/NavBar :: navbar"></div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Registro de Sub-Categorías</div>
+    <div class="panel-body">
+
+        <form class="form-horizontal" action="#"  th:action="@{/subfamiliaEquipos}" th:object="${subfamilia}" method="post" >
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="nombreSubFamilia">Nombre:</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="nombreSubFamilia" name="nombreSubFamilia" type="text" th:field="*{nombreSubFamilia}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" >Categoría:</label>
+                <div class="col-sm-10">
+                    <select class="form-control" name="familiaSelect">
+                        <option value="">Seleccione</option>
+                        <option th:each="familia : ${familias}" th:value="${familia.id}"  th:text="${familia.nombreFamilia}"    ></option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="btn-success" type="submit">Guardar</button>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

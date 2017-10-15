@@ -1,0 +1,56 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
+
+
+<script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+
+<nav class="navbar navbar-inverse" th:fragment="navbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Empresa Emprendedores</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Clientes
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/RegistroCliente">Nuevo</a></li>
+                    <li><a href="/listaClientes">Existentes</a></li>
+
+
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Equipos
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/RegistroEquipos">Equipos</a></li>
+                    <li><a href="/subfamiliaEquipos">SubCategorías</a></li>
+                    <li><a href="/familiaEquipos">Categorías</a></li>
+
+
+
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Alquileres
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/RegistroAlquiler">Registro</a></li>
+
+
+
+
+                </ul>
+            </li>
+
+            <li><a href="#">Usuarios</a></li>
+            <li><a href="#">Iniciar Sesión</a></li>
+        </ul>
+    </div>
+</nav>
+
+</html>

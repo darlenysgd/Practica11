@@ -25,7 +25,7 @@ import java.nio.file.Files;
  * Created by darle on 10/4/2017.
  */
 @Controller
-@RequestMapping("/clientes")
+@RequestMapping("/RegistroCliente")
 public class ClienteFormController {
 
     @Autowired
@@ -37,13 +37,12 @@ public class ClienteFormController {
     {
         return new Cliente();
     }
+
        @RequestMapping(value = "", method = RequestMethod.GET)
        public String RegistroCliente(){
 
                return "/RegistroCliente";
            }
-
-
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     public String GuardarForm(@ModelAttribute Cliente cliente)   {

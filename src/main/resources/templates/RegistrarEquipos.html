@@ -9,54 +9,55 @@
 
     <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+
 </head>
 <body>
+<div th:include="fragments/NavBar :: navbar"></div>
+
 <div class="panel panel-default">
     <div class="panel-heading">Registro de Equipos</div>
     <div class="panel-body">
 
-        <form class="form-horizontal" action="#" th:action="@{/RegistroEquipos}" th:object="${equipo}" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal" action="#"  th:action="@{/RegistroEquipos}" th:object="${equipo}" method="post" enctype="multipart/form-data">
 
             <div class="form-group">
-                <label class="control-label col-sm-2" for="nombre">Familia:</label>
+                <label class="control-label col-sm-2" >Sub-Categoría:</label>
                 <div class="col-sm-10">
-                    <select class="form-control">
-                        <option>Celular</option>
+                    <select class="form-control" name="subFamiliaID">
+                        <option class="form-control">Seleccione</option>
+                        <option th:each="subfamilia : ${subfamilias}" th:value="${subfamilia.id}"  th:text="${subfamilia.nombreSubFamilia}"    ></option>
                     </select>
                 </div>
-                <button>Nueva Familia</button>
             </div>
-
-            <hr>
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="nombre">Nombre:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="nombre" name="noombre" type="text" th:field="*{nombre}"/>
+                    <input class="form-control" id="nombre" name="nombre" type="text" th:field="*{nombre}"/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2" for="marca">Marca:</label>
+                <label class="control-label col-sm-2" for="marca">Modelo:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="marca" type="text" th:field="*{marca}"/>
+                    <input class="form-control" id="marca" type="text" th:field="*{modelo}"/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2" for="modelo">Modelo:</label>
+                <label class="control-label col-sm-2" for="modelo">Codigo Unico:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="modelo" type="text" th:field="*{modelo}"/>
+                    <input class="form-control" id="modelo" type="text" th:field="*{codigo_unico}"/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2" for="valor">Valor:</label>
+                <label class="control-label col-sm-2" for="valor">Precio de compra:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="valor" type="text" th:field="*{valor}"/>
+                    <input class="form-control" id="valor" type="text" th:field="*{valorCompra}"/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2" for="precioAlquiler">Precio Alquiler:</label>
+                <label class="control-label col-sm-2" for="precioAlquiler">Precio de Alquiler por día:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="precioAlquiler" type="text" th:field="*{precioAlquiler}"/>
+                    <input class="form-control" id="precioAlquiler" type="text" th:field="*{costoAlquilerDia}"/>
                 </div>
             </div>
             <button class="btn-success" type="submit">Guardar</button>
