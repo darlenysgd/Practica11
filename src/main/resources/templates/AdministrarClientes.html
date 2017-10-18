@@ -3,7 +3,7 @@
 
 <head lang="en">
     <meta charset="UTF-8"/>
-    <title>Clientes</title>
+    <title  th:text="#{label.title}"> </title>
 
     <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
 
@@ -15,10 +15,10 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Cédula</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Télefono</th>
+                <th th:text="#{label.hdid}"></th>
+                <th th:text="#{label.hdnm}"></th>
+                <th th:text="#{label.hdap}"></th>
+                <th th:text="#{label.hdtel}"></th>
             </tr>
         </thead>
         <tbody>
