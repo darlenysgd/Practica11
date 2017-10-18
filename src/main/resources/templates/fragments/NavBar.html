@@ -48,7 +48,9 @@
             </li>
 
             <li><a href="#">Usuarios</a></li>
-            <li><a href="#">Iniciar Sesión</a></li>
+            <li> <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form></li>
         </ul>
     </div>
 </nav>
