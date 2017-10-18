@@ -13,22 +13,22 @@
         <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Clientes
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"  th:text="#{label.nuevo}">
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="/RegistroCliente">Nuevo</a></li>
-                    <li><a href="/listaClientes">Existentes</a></li>
+                    <li><a href="/RegistroCliente"  th:text="#{label.nuevo}"></a></li>
+                    <li><a href="/listaClientes"  th:text="#{label.exist}"></a></li>
 
 
                 </ul>
             </li>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Equipos
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"  th:text="#{label.equipos}">
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="/RegistroEquipos">Equipos</a></li>
-                    <li><a href="/subfamiliaEquipos">SubCategorías</a></li>
-                    <li><a href="/familiaEquipos">Categorías</a></li>
+                    <li><a href="/RegistroEquipos"  th:text="#{label.equipos}"></a></li>
+                    <li><a href="/subfamiliaEquipos"  th:text="#{label.subcat}"></a></li>
+                    <li><a href="/familiaEquipos"  th:text="#{label.cat}"></a></li>
 
 
 
@@ -36,10 +36,10 @@
             </li>
 
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Alquileres
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"  th:text="#{label.alq}">
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="/RegistroAlquiler">Registro</a></li>
+                    <li><a href="/RegistroAlquiler"  th:text="#{label.reg}"></a></li>
 
 
 
@@ -47,7 +47,7 @@
                 </ul>
             </li>
 
-            <li><a href="#">Usuarios</a></li>
+            <li><a href="#"  th:text="#{label.user}">Usuarios</a></li>
             <li> <form th:action="@{/logout}" method="post">
                 <input type="submit" value="Sign Out"/>
             </form></li>
