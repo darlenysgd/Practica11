@@ -1,5 +1,6 @@
 package quiz3.Entidades;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -15,9 +16,10 @@ public class Cliente {
     private String nombre;
     private String apellido;
     private String telefono;
-    private byte[] imagen;
+    @Column(columnDefinition = "NVARCHAR(MAX)")
+    private String imagen;
 
-    public Cliente(String cedula, String nombre, String apellido, String telefono, byte[] imagen) {
+    public Cliente(String cedula, String nombre, String apellido, String telefono, String imagen) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -60,11 +62,11 @@ public class Cliente {
         this.telefono = telefono;
     }
 
-    public byte[] getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(byte[] imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 }

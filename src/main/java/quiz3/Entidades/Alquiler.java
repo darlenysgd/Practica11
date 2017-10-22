@@ -15,7 +15,6 @@ public class Alquiler {
     private Cliente cliente;
     private String fechaAlquiler;
     private String fechaEntrega;
-    private String imagen;
     private long montoTotal;
     @OneToMany
     List<Equipos> equipos;
@@ -61,14 +60,6 @@ public class Alquiler {
 
     public void setFechaEntrega(String fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
-    }
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
     }
 
     public long getMontoTotal() {

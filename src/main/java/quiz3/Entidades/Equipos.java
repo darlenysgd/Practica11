@@ -1,9 +1,6 @@
 package quiz3.Entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Created by darle on 10/13/2017.
@@ -19,13 +16,16 @@ public class Equipos {
     private long valorCompra;
     private boolean alquilado;
     private float costoAlquilerDia;
+    private int cantidad;
     @ManyToOne
     private SubFamiliaEquipos subFamiliaEquipos;
+    @Column(columnDefinition = "NVARCHAR(MAX)")
+    private String imagen;
 
     public Equipos() {
     }
 
-    public Equipos(String nombre, String modelo, String codigo_unico, long valorCompra, boolean alquilado, float costoAlquilerDia, SubFamiliaEquipos subFamiliaEquipos) {
+    public Equipos(String nombre, String modelo, String codigo_unico, long valorCompra, boolean alquilado, float costoAlquilerDia, SubFamiliaEquipos subFamiliaEquipos, int cantidad) {
         this.nombre = nombre;
         this.modelo = modelo;
         this.codigo_unico = codigo_unico;
@@ -33,6 +33,7 @@ public class Equipos {
         this.alquilado = alquilado;
         this.costoAlquilerDia = costoAlquilerDia;
         this.subFamiliaEquipos = subFamiliaEquipos;
+        this.cantidad = cantidad;
     }
 
     public long getId() {
@@ -97,5 +98,21 @@ public class Equipos {
 
     public void setSubFamiliaEquipos(SubFamiliaEquipos subFamiliaEquipos) {
         this.subFamiliaEquipos = subFamiliaEquipos;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 }

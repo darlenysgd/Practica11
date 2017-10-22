@@ -35,16 +35,6 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label col-sm-2">Equipos:</label>
-                <div class="col-sm-10">
-                    <select multiple class="form-control"  name="clienteID">
-                        <option>Selecciones</option>
-                        <option></option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
                 <label class="control-label col-sm-2" >Fecha de Alquiler:</label>
                 <div class="col-sm-10">
                     <input class='form-control' name="date" id="date" />
@@ -54,11 +44,35 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" >Fecha de Entrega:</label>
                 <div class="col-sm-10">
-                    <input class='form-control' name="date" id="date2" />
+                    <input class='form-control' name="date" id="dat" />
                 </div>
             </div>
 
+            <div class="form-group">
+                <label class="control-label col-sm-2">Equipos:</label>
+                <div class="col-sm-10">
+                    <select multiple="multiple" class="form-control" id="equiposSelect" name="equiosID">
+                        <option th:each="equipo : ${equipos}" th:value="${equipo.cantidad}"  th:text="${equipo.nombre}"></option>
+                    </select>
+                </div>
+            </div>
 
+            <a href="#" onclick="loadDevices()">Agregar</a>
+
+            <table class="table" id="thetable">
+                <thead>
+                <tr>
+                    <th>Nombre del Equipo</th>
+                    <th>Cantidad</th>
+                    <th>Fecha de entrega</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
 
             <button class="btn-success" type="submit">Guardar</button>
         </form>
@@ -68,11 +82,38 @@
 </body>
 
 <script>
+    /*<![CDATA[*/
     $( document ).ready(function() {
         jQuery(function ($) {
             $("#date").mask("99/99/9999", { placeholder: "dd/mm/yyyy" });
             $("#date2").mask("99/99/9999", { placeholder: "dd/mm/yyyy" });
         });
     });
+
+
+    function loadDevices() {
+        var x = document.getElementById("equiposSelect");
+
+        var lista = [];
+        var listaCant = [];
+        for (var i = 0; i < x.options.length; i++) {
+            if(x.options[i].selected){
+                lista.push(x.options[i].text);
+                listaCant.push(x.options[i].value);
+            }
+        }
+
+
+        $('#thetable tr').not(':first').not(':last').remove();
+        var html = '';
+        for(i = 0; i < lista.length; i++) {
+
+            html += '<tr><td>' + lista[i] + '</td><td>' + '<input type="number" id="maxValue" min="0"/>' + '</td></tr>';
+            document.getElementById("maxValue").setAttribute("max", listaCant[i]);
+        }
+        $('#thetable tr').first().after(html);
+
+    }
+    /*]]>*/
 </script>
 </html>

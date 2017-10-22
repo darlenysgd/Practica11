@@ -4,6 +4,7 @@ package quiz3.Controladores;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,13 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.context.WebContext;
 import quiz3.Entidades.Cliente;
 import quiz3.Servicios.ClienteServices;
-import quiz3.repositorio.ClienteRepository;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayInputStream;
-import java.nio.file.Files;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+
+import java.io.IOException;
 
 
 /**
@@ -27,6 +25,7 @@ import java.nio.file.Files;
 @Controller
 @RequestMapping("/RegistroCliente")
 public class ClienteFormController {
+
 
     @Autowired
     ClienteServices clienteServices;
@@ -44,13 +43,15 @@ public class ClienteFormController {
                return "/RegistroCliente";
            }
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
-    public String GuardarForm(@ModelAttribute Cliente cliente)   {
+        @RequestMapping(value = "", method = RequestMethod.POST)
+        public String GuardarForm(@ModelAttribute Cliente cliente, @RequestParam("file") MultipartFile uploadFile) throws IOException {
 
-        clienteServices.crearCliente(cliente);
 
-        return "/RegistroCliente";
-        }
+            cliente.setImagen(Base64.encode(uploadFile.getBytes()));
+            clienteServices.crearCliente(cliente);
+
+            return "/RegistroCliente";
+            }
 
 
 }
