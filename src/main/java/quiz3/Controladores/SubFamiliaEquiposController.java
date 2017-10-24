@@ -17,7 +17,7 @@ import java.util.List;
  * Created by darle on 10/14/2017.
  */
 @Controller
-    @RequestMapping("/subfamiliaEquipos")
+@RequestMapping("/subfamiliaEquipos")
 public class SubFamiliaEquiposController {
 
 

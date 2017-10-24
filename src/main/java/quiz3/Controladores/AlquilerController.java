@@ -2,6 +2,9 @@ package quiz3.Controladores;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,13 +39,28 @@ public class AlquilerController {
     EquipoServices equipoServices;
 
     @ModelAttribute("equipos")
-    public List<Equipos> equipos() {
+    public List<Equipos> equipos() throws JSONException {
+
+        List<Equipos> equipos = equipoServices.findAllEquipos();
+        JSONArray arr = new JSONArray();
+        JSONObject tmp;
+
+        for(int i = 0; i < equipos.size(); i++){
+            tmp = new JSONObject();
+            tmp.put("ID", equipos.get(i).getId());
+            tmp.put("nombre", equipos.get(i).getNombre());
+
+
+        }
+
+
         return equipoServices.findAllEquipos();
     }
 
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String viewAlquiler(@ModelAttribute Alquiler alquiler, Model model)   {
+
 
         return "/AlquilerEquipos";
     }
