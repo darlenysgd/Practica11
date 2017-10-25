@@ -1,5 +1,6 @@
 package quiz3.Controladores;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import org.json.JSONArray;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import quiz3.Entidades.Alquiler;
 import quiz3.Entidades.Cliente;
 import quiz3.Entidades.Equipos;
@@ -20,6 +22,7 @@ import quiz3.Servicios.AlquilerServices;
 import quiz3.Servicios.ClienteServices;
 import quiz3.Servicios.EquipoServices;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -39,19 +42,8 @@ public class AlquilerController {
     EquipoServices equipoServices;
 
     @ModelAttribute("equipos")
-    public List<Equipos> equipos() throws JSONException {
+    public List<Equipos> equipos()  {
 
-        List<Equipos> equipos = equipoServices.findAllEquipos();
-        JSONArray arr = new JSONArray();
-        JSONObject tmp;
-
-        for(int i = 0; i < equipos.size(); i++){
-            tmp = new JSONObject();
-            tmp.put("ID", equipos.get(i).getId());
-            tmp.put("nombre", equipos.get(i).getNombre());
-
-
-        }
 
 
         return equipoServices.findAllEquipos();
@@ -59,15 +51,17 @@ public class AlquilerController {
 
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String viewAlquiler(@ModelAttribute Alquiler alquiler, Model model)   {
+    public String viewAlquiler(@ModelAttribute Alquiler alquiler, Model model)  {
 
 
         return "/AlquilerEquipos";
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String GuardarForm(Model model, @ModelAttribute Alquiler alquiler)   {
+    public String GuardarForm(Model model, @ModelAttribute Alquiler alquiler, HttpServletRequest request, @RequestParam String equiposArray)    {
 
+
+        String aarray = equiposArray;
 
         return "/AlquilerEquipos";
     }
