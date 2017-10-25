@@ -30,8 +30,9 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-remote-shell')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile("org.springframework.boot:spring-boot-starter-security")
+	compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.1.7.Final'
 
-	compile group: 'com.google.code.gson', name: 'gson', version: '1.7.2'
+
 
 	//Thymeleaf plantilla
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
