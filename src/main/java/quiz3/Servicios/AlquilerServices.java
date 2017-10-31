@@ -23,6 +23,11 @@ public class AlquilerServices {
         return alquiler;
     }
 
+    public void deleteAlquiler(long id){
+
+        alquilerRepository.delete(id);
+    }
+
     public List<Alquiler> findAllAlquileres(){
         return alquilerRepository.findAll();
     }

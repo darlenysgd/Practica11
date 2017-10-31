@@ -1,8 +1,7 @@
 package quiz3.Entidades;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by darle on 10/4/2017.
@@ -12,6 +11,8 @@ import javax.persistence.Id;
 public class Cliente {
 
     @Id
+    @GeneratedValue
+    private long id;
     private String cedula;
     private String nombre;
     private String apellido;
@@ -28,6 +29,14 @@ public class Cliente {
     }
 
     public Cliente() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getCedula() {
@@ -69,4 +78,8 @@ public class Cliente {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
+
+
+
+
 }

@@ -1,6 +1,7 @@
 package quiz3.Entidades;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -11,23 +12,14 @@ public class Alquiler {
     @Id
     @GeneratedValue
     private long id;
-    @OneToOne
-    private Cliente cliente;
-    private String fechaAlquiler;
-    private String fechaEntrega;
+    private long cliente;
+    private Date fechaAlquiler;
     private long montoTotal;
-    @OneToMany
-    List<Equipos> equipos;
+    private long equipoId;
+    private int cantidad;
+    private Date fechaEntrega;
 
     public Alquiler() {
-    }
-
-    public Alquiler(Cliente cliente, String fechaAlquiler, String fechaEntrega, long montoTotal, List<Equipos> equipos) {
-        this.cliente = cliente;
-        this.fechaAlquiler = fechaAlquiler;
-        this.fechaEntrega = fechaEntrega;
-        this.montoTotal = montoTotal;
-        this.equipos = equipos;
     }
 
     public long getId() {
@@ -38,28 +30,28 @@ public class Alquiler {
         this.id = id;
     }
 
-    public Cliente getCliente() {
+    public long getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(long cliente) {
         this.cliente = cliente;
     }
 
-    public String getFechaAlquiler() {
+    public long getEquipoId() {
+        return equipoId;
+    }
+
+    public void setEquipoId(long equipoId) {
+        this.equipoId = equipoId;
+    }
+
+    public Date getFechaAlquiler() {
         return fechaAlquiler;
     }
 
-    public void setFechaAlquiler(String fechaAlquiler) {
+    public void setFechaAlquiler(Date fechaAlquiler) {
         this.fechaAlquiler = fechaAlquiler;
-    }
-
-    public String getFechaEntrega() {
-        return fechaEntrega;
-    }
-
-    public void setFechaEntrega(String fechaEntrega) {
-        this.fechaEntrega = fechaEntrega;
     }
 
     public long getMontoTotal() {
@@ -70,11 +62,20 @@ public class Alquiler {
         this.montoTotal = montoTotal;
     }
 
-    public List<Equipos> getEquipos() {
-        return equipos;
+
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setEquipos(List<Equipos> equipos) {
-        this.equipos = equipos;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public Date getFechaEntrega() {
+        return fechaEntrega;
+    }
+
+    public void setFechaEntrega(Date fechaEntrega) {
+        this.fechaEntrega = fechaEntrega;
     }
 }

@@ -2,7 +2,7 @@ package quiz3.Controladores;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,15 +18,23 @@ import org.springframework.web.servlet.ModelAndView;
 import quiz3.Entidades.Alquiler;
 import quiz3.Entidades.Cliente;
 import quiz3.Entidades.Equipos;
+import quiz3.Entidades.EquiposAlquiler;
 import quiz3.Servicios.AlquilerServices;
 import quiz3.Servicios.ClienteServices;
 import quiz3.Servicios.EquipoServices;
+import quiz3.Servicios.EquiposAlquilerServices;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by darle on 10/14/2017.
@@ -41,12 +49,37 @@ public class AlquilerController {
     @Autowired
     EquipoServices equipoServices;
 
+    @Autowired
+    ClienteServices clienteServices;
+
+    @Autowired
+    EquiposAlquilerServices equiposAlquilerServices;
+
+    public Equipos findEquipo(String nombre){
+
+        Equipos equipo = new Equipos();
+        for(Equipos eq : equipoServices.findAllEquipos()){
+            if(nombre.equals(eq.getNombre())){
+                equipo = eq;
+            }
+
+        }
+        return equipo;
+    }
+
     @ModelAttribute("equipos")
     public List<Equipos> equipos()  {
 
 
 
         return equipoServices.findAllEquipos();
+    }
+
+    @ModelAttribute("clientes")
+    public List<Cliente> clientes(){
+
+            return clienteServices.findAllClientes();
+
     }
 
 
@@ -58,10 +91,39 @@ public class AlquilerController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String GuardarForm(Model model, @ModelAttribute Alquiler alquiler, HttpServletRequest request, @RequestParam String equiposArray)    {
+    public String GuardarForm(Model model, @ModelAttribute Alquiler alquiler, HttpServletRequest request, @RequestParam String equipoObject) throws JSONException, ParseException {
 
 
-        String aarray = equiposArray;
+        String clienteID = request.getParameter("clienteID");
+
+        Cliente cliente =   clienteServices.findCliente(Long.parseLong(clienteID));
+
+        alquiler.setCliente(cliente.getId());
+
+        Date fecha = new Date();
+
+
+
+            JSONObject jsonobject = new JSONObject(equipoObject);
+
+
+            String target = jsonobject.getString("fechaEntrega");
+            DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+            Date result =  df.parse(target);
+
+            alquiler.setCantidad(Integer.parseInt(jsonobject.getString("cantidad")));
+            alquiler.setFechaEntrega(result);
+
+            Equipos eq =  findEquipo(jsonobject.getString("equipo"));
+            eq.setCantidad(eq.getCantidad() - Integer.parseInt(jsonobject.getString("cantidad")));
+
+
+
+        alquiler.setEquipoId(eq.getId());
+
+        alquiler.setFechaAlquiler(fecha);
+
+        alquilerServices.crearAlquiler(alquiler);
 
         return "/AlquilerEquipos";
     }

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title  th:text="#{label.title}"> </title>
+
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
+
+    <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:include="fragments/NavBar :: navbar"></div>
+
+<form class="form-horizontal" action="#" th:action="@{/Devolucion}"  method="post">
+
+    <div class="form-group">
+    <label class="control-label col-sm-2">Cliente:</label>
+    <div class="col-sm-10">
+        <select class="selectpicker form-control" data-live-search="true" id="clienteID" name="clienteID" onchange="ListChange()">
+            <option>Seleccione</option>
+            <option th:each="cliente : ${clientes}" th:value="${cliente.id}"  th:text="${cliente.nombre}" ></option>
+        </select>
+    </div>
+    </div>
+
+    <div class="form-group">
+    <label class="control-label col-sm-2">Alquiler:</label>
+    <div class="col-sm-10">
+        <select class="selectpicker form-control" data-live-search="true" id="fechaCli" name="fechaAlquilerCli" onchange="fillTable()">
+            <option>Seleccione</option>
+        </select>
+    </div>
+    </div>
+
+    <table class="table table-bordered" id="myTable">
+    <thead>
+    <tr>
+        <th>
+            Equipo
+        </th>
+        <th>
+            Cantidad
+        </th>
+        <th>
+            Fecha de Alquiler
+        </th>
+        <th>
+            Fecha de Entrega
+        </th>
+        <th>
+            Cantidad Entrega
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+    </table>
+
+    <br/>
+
+    <a onclick="facturar()">Facturar</a>
+
+    <br/>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2">Precio por día:</label>
+        <div class="col-sm-10">
+            <label>Total: </label>
+            <input id="pordia" name="pordia" readonly="readonly"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2">Total:</label>
+        <div class="col-sm-10">
+           <label>Total: </label>
+            <input id="total" name="total" readonly="readonly"/>
+        </div>
+    </div>
+
+
+    <button class="btn-success" type="submit">Guardar</button>
+
+    <input name="alqID" id="alqID" hidden="hidden"/>
+    <input name="eqname" hidden="hidden"/>
+    <input name="cantAlquilada" hidden="hidden"/>
+</form>
+</body>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+
+
+    function facturar() {
+        var eq = [[${equipos}]];
+        var eqId = document.getElementById("eqId").innerText;
+
+
+        console.log(eq);
+        var cant = document.getElementById("cantEntregada").value;
+
+        var total;
+
+        for(var i = 0; i < eq.length; i++){
+
+            if(eqId == eq[i].id){
+
+
+                 total = cant * eq[i].precioDia;
+                document.getElementById("pordia").value = eq[i].precioDia;
+
+            }
+        }
+
+        document.getElementById("total").value = total;
+
+    }
+    function ListChange() {
+
+            var x = document.getElementById("clienteID");
+
+            var modelList = document.getElementById("fechaCli");
+
+            var alqList = [[${alquileres}]];
+
+            for (var i = 0; i < alqList.length; i++) {
+
+                if (alqList[i].cliente == x.options[x.selectedIndex].value) {
+
+                    var opt = document.createElement("option");
+                    opt.vaue = i+1;
+                    opt.text = alqList[i].fechaAlquiler;
+                    modelList.appendChild(opt);
+                }
+
+            }
+
+        }
+
+        function fillTable() {
+
+          $("#myTable tbody tr").remove();
+
+            var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
+
+            var x = document.getElementById("fechaCli");
+            var x2 = x.options[x.selectedIndex].value;
+            var alqList = [[${alquileres}]];
+
+            console.log(alqList);
+            for(var i= 0; i < alqList.length; i++){
+
+                if(alqList[i].fechaAlquiler == x2){
+                    document.getElementById("alqID").value = alqList[i].id;
+                    var row = table.insertRow(0);
+                    var cell1 = row.insertCell(0);
+                    cell1.innerHTML = alqList[i].equipoId;
+                    cell1.setAttribute("id", "eqId");
+                    cell1.setAttribute("name", "eqname");
+                    var cell2 = row.insertCell(1);
+                    cell2.innerHTML = alqList[i].cantidad;
+                    cell2.setAttribute("name", "cantDevuelta");
+                    var cell3 = row.insertCell(2);
+                    cell3.innerHTML = alqList[i].fechaAlquiler;
+                    var cell4 = row.insertCell(3);
+                    cell4.innerHTML = alqList[i].fechaEntrega;
+                    var cell5 = row.insertCell(4);
+                    cell5.innerHTML = "<input type='number' name='cantEntregada' id='cantEntregada'/>";
+                    document.getElementById("cantEntregada").max = alqList[i].cantidad;
+                    document.getElementById("cantEntregada").min = 1;
+                }
+            }
+
+
+
+        }
+
+
+
+
+    /*]]>*/
+
+</script>
+</html>

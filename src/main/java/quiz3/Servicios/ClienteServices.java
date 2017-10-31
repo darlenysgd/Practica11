@@ -27,4 +27,9 @@ public class ClienteServices {
 
         return clienteRepository.findAll();
     }
+
+    public Cliente findCliente(long id){
+        return clienteRepository.findOne(id);
+    }
+
 }
