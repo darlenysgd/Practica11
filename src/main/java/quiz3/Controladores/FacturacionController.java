@@ -101,11 +101,16 @@ public class FacturacionController {
 
         String aux = request.getParameter("cantEntregada");
         int cantidadDevuelta = Integer.parseInt(aux);
+
         String auxeq = request.getParameter("eqname");
+
+        String diasT = request.getParameter("diasT");
 
         Equipos equipos = findEquipo(Long.parseLong(auxeq));
 
         equipos.setCantidad(equipos.getCantidad() + cantidadDevuelta);
+
+        equipos.getSubFamiliaEquipos().getFamiliaEquipos().setDiasTotalAlquiler(equipos.getSubFamiliaEquipos().getFamiliaEquipos().getDiasTotalAlquiler() + Integer.parseInt(diasT));
 
         equipoServices.crearEquipo(equipos);
         String alqAux = request.getParameter("alqID");

@@ -16,6 +16,8 @@ public class FamiliaEquipos {
     private long id;
     private String nombreFamilia;
     private int cantidadExistente;
+    private int cantAlquilado = 0;
+    private int diasTotalAlquiler = 0;
     @OneToMany
     private List<SubFamiliaEquipos> subFamiliaEquipos;
 
@@ -57,5 +59,21 @@ public class FamiliaEquipos {
 
     public void setSubFamiliaEquipos(List<SubFamiliaEquipos> subFamiliaEquipos) {
         this.subFamiliaEquipos = subFamiliaEquipos;
+    }
+
+    public int getCantAlquilado() {
+        return cantAlquilado;
+    }
+
+    public void setCantAlquilado(int cantAlquilado) {
+        this.cantAlquilado = cantAlquilado;
+    }
+
+    public int getDiasTotalAlquiler() {
+        return diasTotalAlquiler;
+    }
+
+    public void setDiasTotalAlquiler(int diasTotalAlquiler) {
+        this.diasTotalAlquiler = diasTotalAlquiler;
     }
 }

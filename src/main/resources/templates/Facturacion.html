@@ -66,27 +66,35 @@
     <br/>
 
     <div class="form-group">
-        <label class="control-label col-sm-2">Precio por día:</label>
         <div class="col-sm-10">
-            <label>Total: </label>
+            <label>Cantidad de días de alquiler:</label>
+            <input id="diasT" name="diasT" readonly="readonly"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-sm-10">
+            <label>Precio por día:</label>
             <input id="pordia" name="pordia" readonly="readonly"/>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="control-label col-sm-2">Total:</label>
         <div class="col-sm-10">
            <label>Total: </label>
             <input id="total" name="total" readonly="readonly"/>
         </div>
     </div>
 
+    <input name="alqID" id="alqID" hidden="hidden"/>
+    <input name="eqname" id="eqname" hidden="hidden"/>
+    <input name="cantAlquilada" id="cantAlquilada" hidden="hidden"/>
 
     <button class="btn-success" type="submit">Guardar</button>
 
-    <input name="alqID" id="alqID" hidden="hidden"/>
-    <input name="eqname" hidden="hidden"/>
-    <input name="cantAlquilada" hidden="hidden"/>
+
+
 </form>
 </body>
 
@@ -94,13 +102,26 @@
     /*<![CDATA[*/
 
 
+    restaFechas = function(f1,f2)
+    {
+        var aFecha1 = f1.split('/');
+        var aFecha2 = f2.split('/');
+        var fFecha1 = Date.UTC(aFecha1[2],aFecha1[1]-1,aFecha1[0]);
+        var fFecha2 = Date.UTC(aFecha2[2],aFecha2[1]-1,aFecha2[0]);
+        var dif = fFecha2 - fFecha1;
+        var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
+        return dias;
+    };
 
     function facturar() {
+
         var eq = [[${equipos}]];
         var eqId = document.getElementById("eqId").innerText;
 
 
-        console.log(eq);
+        var dias = restaFechas(document.getElementById("fechaAlq").innerText, document.getElementById("fechaEntr").innerText);
+
+        document.getElementById("diasT").value = dias;
         var cant = document.getElementById("cantEntregada").value;
 
         var total;
@@ -110,7 +131,7 @@
             if(eqId == eq[i].id){
 
 
-                 total = cant * eq[i].precioDia;
+                 total = dias * cant * eq[i].precioDia;
                 document.getElementById("pordia").value = eq[i].precioDia;
 
             }
@@ -119,6 +140,7 @@
         document.getElementById("total").value = total;
 
     }
+
     function ListChange() {
 
             var x = document.getElementById("clienteID");
@@ -157,21 +179,33 @@
                 if(alqList[i].fechaAlquiler == x2){
                     document.getElementById("alqID").value = alqList[i].id;
                     var row = table.insertRow(0);
+
                     var cell1 = row.insertCell(0);
                     cell1.innerHTML = alqList[i].equipoId;
                     cell1.setAttribute("id", "eqId");
-                    cell1.setAttribute("name", "eqname");
+
                     var cell2 = row.insertCell(1);
                     cell2.innerHTML = alqList[i].cantidad;
-                    cell2.setAttribute("name", "cantDevuelta");
+
                     var cell3 = row.insertCell(2);
-                    cell3.innerHTML = alqList[i].fechaAlquiler;
+                    var date = new Date(alqList[i].fechaAlquiler);
+                    cell3.innerHTML = date.getDate() + '/' + (date.getMonth()+1)  + '/' +  date.getFullYear();
+                    cell3.setAttribute("id", "fechaAlq");
+
                     var cell4 = row.insertCell(3);
-                    cell4.innerHTML = alqList[i].fechaEntrega;
+                    date = new Date(alqList[i].fechaEntrega);
+                    cell4.innerHTML = date.getDate() + '/' + (date.getMonth()+1)  + '/' +  date.getFullYear();
+                    cell4.setAttribute("id", "fechaEntr");
+
+
                     var cell5 = row.insertCell(4);
                     cell5.innerHTML = "<input type='number' name='cantEntregada' id='cantEntregada'/>";
                     document.getElementById("cantEntregada").max = alqList[i].cantidad;
                     document.getElementById("cantEntregada").min = 1;
+
+                    document.getElementById("eqname").value = alqList[i].equipoId;
+                    document.getElementById("cantAlquilada").value = alqList[i].cantidad;
+
                 }
             }
 

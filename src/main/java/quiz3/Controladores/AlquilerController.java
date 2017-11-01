@@ -108,7 +108,7 @@ public class AlquilerController {
 
 
             String target = jsonobject.getString("fechaEntrega");
-            DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             Date result =  df.parse(target);
 
             alquiler.setCantidad(Integer.parseInt(jsonobject.getString("cantidad")));
@@ -117,11 +117,13 @@ public class AlquilerController {
             Equipos eq =  findEquipo(jsonobject.getString("equipo"));
             eq.setCantidad(eq.getCantidad() - Integer.parseInt(jsonobject.getString("cantidad")));
 
+            eq.getSubFamiliaEquipos().getFamiliaEquipos().setCantAlquilado(eq.getSubFamiliaEquipos().getFamiliaEquipos().getCantAlquilado() + Integer.parseInt(jsonobject.getString("cantidad")));
 
 
         alquiler.setEquipoId(eq.getId());
 
         alquiler.setFechaAlquiler(fecha);
+
 
         alquilerServices.crearAlquiler(alquiler);
 
