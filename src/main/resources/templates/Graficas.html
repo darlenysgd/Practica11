@@ -7,8 +7,52 @@
     <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
 
     <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
     <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
 
+    <script th:inline="javascript">
+
+        /*<![CDATA[*/
+        $( document ).ready(function() {
+
+            var data = [[${promedios}]];
+            var dataPoints = [];
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                theme: "light2",
+                title: {
+                    text: "Promedio de dias por familia"
+                },
+                axisY: {
+                    title: "Units",
+                    titleFontSize: 24
+                },
+                data: [{
+                    type: "column",
+                    dataPoints: dataPoints
+                }]
+            });
+
+
+            $.each(data, function(k, v) {
+
+                dataPoints.push({
+                    label: k,
+                    y: v
+                });
+                //display the key and value pair
+                console.log(k + ' is ' + v);
+            });
+
+            chart.render();
+
+
+        });
+
+        /*]]>*/
+    </script>
 </head>
 <body>
 
@@ -17,6 +61,7 @@
     <div class="panel-heading">Graficas</div>
     <div class="panel-body">
 
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 
 
     </div>

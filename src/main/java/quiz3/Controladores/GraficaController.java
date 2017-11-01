@@ -15,6 +15,7 @@ import quiz3.Servicios.FamiliaEquipoServices;
 import quiz3.Servicios.SubFamiliaServices;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,13 +38,18 @@ public class GraficaController {
     SubFamiliaServices subFamiliaServices;
 
     @ModelAttribute("promedios")
-    public List<Float> prom(){
+    public HashMap<String, Float> prom(){
 
-        List<Float> promedios = new ArrayList<>();
+        HashMap<String, Float> promedios = new HashMap<>();
 
         for(FamiliaEquipos fam: familiaEquipoServices.findAllFamiliasEquipos()){
             int cantDias = fam.getDiasTotalAlquiler();
-            int cantAlquileres = fam.getDiasTotalAlquiler();
+            int cantAlquileres = fam.getCantAlquilado();
+
+            if (cantDias > 0 || cantAlquileres > 0) {
+
+                promedios.put(fam.getNombreFamilia(),(float) cantDias/cantAlquileres);
+            }
         }
         return promedios;
     }
